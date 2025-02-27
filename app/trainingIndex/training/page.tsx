@@ -70,6 +70,8 @@ const TrainingPage = () => {
   const getUseChords = () => {
     let diatonicChordresult;
     setLoading(true);
+    if (!diatonicChords || diatonicChords.length === 0) return; // データが取得できていない場合は処理を中断
+  
     switch (level) {
       case '1':
         diatonicChordresult = diatonicChords.find(diatonicChord => diatonicChord.key === 'C' && diatonicChord.mm === 'M');
@@ -85,7 +87,13 @@ const TrainingPage = () => {
         diatonicChordresult = undefined;
         break;
     }
-
+  
+    if (!diatonicChordresult) {
+      console.log("ダイアトニックコードが見つかりませんでした");
+      setLoading(false);
+      return;
+    }
+  
   const chordsResult: string[][] = [];
   for (let i = 1; i < 8; i++) {
     let foundChord;
@@ -172,7 +180,7 @@ const TrainingPage = () => {
   };
 
   useEffect(() => {
-    if (typeof window === "undefined") return; // サーバーサイドでは実行しない
+    if (typeof window === "undefined") return; // クライアントサイドでのみ実行
   
     const getDiatonicChords = async () => {
       setLoading(true);
@@ -187,6 +195,7 @@ const TrainingPage = () => {
   
     getDiatonicChords();
   }, []); // 最初にデータを取得
+  
   
 
   useEffect(() => {
