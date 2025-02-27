@@ -222,7 +222,7 @@ const TrainingPage = () => {
       }
     }
     setLoading(false);
-  }, [diatonicChords, level, key, mm]); // 依存配列に level, key, mm を追加
+  }, [diatonicChords]); // 依存配列に level, key, mm を追加
   
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -328,14 +328,10 @@ const TrainingPage = () => {
     const answers: string[] = [];
     
     currentSelection.forEach((selection, index) => {
-      if (selection === selectedChords[index].degree) { // 音が一致するか確認
-        console.log('selection',selection);
-        console.log('selectedChords',selectedChords[index].degree);
+      if (selection === selectedChords[index].degree) {
         correctCount++;
         answers.push(`〇: ${selectedChords[index].degree}`);
       } else {
-        console.log('selection',selection);
-        console.log('selectedChords',selectedChords[index].degree);
         answers.push(`×: 正解は ${selectedChords[index].degree}`);
       }
     });
