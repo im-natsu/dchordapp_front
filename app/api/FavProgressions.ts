@@ -3,7 +3,7 @@ import { FavProgression } from '../_interfaces/FavProgression';
 
 
 const api = axios.create({
-  baseURL : '/api',
+  baseURL : 'https://dchordapp-back-1.onrender.com/api',
 });
 
 
