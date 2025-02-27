@@ -40,10 +40,9 @@ const TrainingPage = () => {
   const searchParams = useSearchParams();  // クエリパラメータを取得
 
   // クエリパラメータを取得
-  const level = searchParams.get('level');
-  const key = searchParams.get('key');
-  const mm = searchParams.get('mm');
-
+  const [level, setLevel] = useState('');
+  const [key, setKey] = useState('');
+  const [mm, setMm] = useState('');
 
   // 音を再生する関数
   const playChord = (chord: string[]) => {
@@ -211,6 +210,19 @@ const TrainingPage = () => {
     if (typeof window === "undefined") return;
     setSelectedChords(getRandomChords());
   }, [selectedDiatonicChord]); 
+
+  useEffect(() => {
+    const level = searchParams.get('level');
+    const key = searchParams.get('key');
+    const mm = searchParams.get('mm');
+    
+    setLevel(level ?? ""); // 状態に保存
+    setKey(key ?? ""); // 状態に保存
+    setMm(mm ?? ""); // 状態に保存
+  
+    // 使用するコードを取得
+    getUseChords();
+  }, [searchParams]); 
 
 
   const handleNoteClick = (degree: string) => {
