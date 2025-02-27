@@ -9,6 +9,8 @@ import { DiatonicChord } from '@/app/_interfaces/DiatonicChord';
 import { findAllDiactonicChords } from '@/app/api/DiatonicChords';
 import { useSearchParams } from 'next/navigation';
 
+// 動的レンダリングを強制
+export const dynamic = 'force-dynamic';
 
 const TrainingPage = () => {
   const [diatonicChords, setDiatonicChords] = useState<DiatonicChord[]>([])
