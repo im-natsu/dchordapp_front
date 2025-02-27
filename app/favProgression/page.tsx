@@ -92,13 +92,14 @@ export default function ChordProgressionPage() {
         }
     };
 
-    const keyChange = (e: any) => {
+    const keyChange = (e: { value: string }) => {
         setSelectedKeyOption({ label: e.value, value: e.value });
     };
-
-    const mmChange = (e: any) => {
+    
+    const mmChange = (e: { value: string }) => {
         setSelectedMmOption({ label: e.value, value: e.value });
     };
+    
 
     const handleDiatonicChordUpdate = (diatonicChordresult: DiatonicChord) => {
         if (!diatonicChordresult) return;
