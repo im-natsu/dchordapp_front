@@ -10,13 +10,13 @@ import { ChordOptions } from '../_components/ChordOptions';
 
 const TrainingIndexPage = () => {
 
-  const [keyOptions, setKeyOptions] = useState<{ label: string; value: string }[]>(ChordOptions.keys);   // ドロップダウンの選択肢
+  const [keyOptions] = useState<{ label: string; value: string }[]>(ChordOptions.keys);   // ドロップダウンの選択肢
   const [selectedKeyOption, setSelectedKeyOption] = useState<{ label: string; value: string }>({ label : 'C' , value : 'C'});
 
-  const [mmOptions, setMmOptions] = useState<{ label: string; value: string }[]>(ChordOptions.modes);   // ドロップダウンの選択肢
+  const [mmOptions] = useState<{ label: string; value: string }[]>(ChordOptions.modes);   // ドロップダウンの選択肢
 
   const [selectedMmOption, setSelectedMmOption] = useState<{ label: string; value: string }>({ label : 'M' , value : 'M'});
-  const [loading, setLoading] = useState(false)
+  const [loading] = useState(false)
 
   const [level, setLevel] = useState(1);
   const router = useRouter();
