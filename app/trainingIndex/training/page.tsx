@@ -60,12 +60,7 @@ const TrainingPage = () => {
     setLevel(level);
     setKey(key);
     setMm(mm);
-    
-    // パラメータが変更された後にコードを取得
-    if (diatonicChords.length > 0) {
-      getUseChords();
-    }
-  };
+      };
 
   // 音を再生する関数
   const playChord = (chord: string[]) => {
@@ -222,7 +217,7 @@ const TrainingPage = () => {
       }
     }
     setLoading(false);
-  }, [diatonicChords]); // 依存配列に level, key, mm を追加
+  }, [diatonicChords]); 
   
   useEffect(() => {
     if (typeof window === "undefined") return;
