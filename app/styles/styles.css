@@ -1,0 +1,28 @@
+.custom-button {
+  width: 120px;  /* ボタンの幅を広く設定 */
+  height: 50px;  /* ボタンの高さ */
+  background-color: #6fa3a5;  /* 落ち着いた青緑色 */
+  color: white;  /* 文字色を白に設定 */
+  border-radius: 5px;  /* ボタンの角を丸く設定 */
+  border: 2px solid transparent;  /* ボーダーを透明に設定 */
+  font-size: 16px;  /* フォントサイズ */
+  font-weight: bold;  /* フォントを太字に設定 */
+  transition: background-color 0.3s, transform 0.2s;  /* ホバー時のアニメーション */
+  cursor: pointer;  /* マウスカーソルをポインターに設定 */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);  /* シャドウを追加 */
+}
+
+.custom-button:hover {
+  background-color: #5a8a8d;  /* ホバー時に少し暗い青緑色に変更 */
+  transform: translateY(-2px);  /* ホバー時に少し上に動く */
+}
+
+.custom-button:active {
+  background-color: #4f7a7c;  /* クリック時の色をさらに落ち着いた色に変更 */
+  transform: translateY(0);  /* クリック時に元の位置に戻す */
+}
+
+.custom-button:focus {
+  outline: none;  /* フォーカス時のアウトラインを消す */
+  border: 2px solid #5a8a8d;  /* フォーカス時にホバー時の色に合わせたボーダーを追加 */
+}
