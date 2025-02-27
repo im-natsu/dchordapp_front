@@ -1,17 +1,16 @@
 import { DiatonicChord } from "../_interfaces/DiatonicChord";
 import { Button } from 'primereact/button';
-import { Dropdown } from 'primereact/dropdown';
-import { useEffect, useState } from "react";
+import { Dropdown, DropdownChangeEvent } from 'primereact/dropdown';
 import * as Tone from 'tone'
 
 interface optionsProps{
-  keyOptions : { label: String; value: String }[];
-  mmOptions : { label: String; value: String }[];
-  keyChange: (e: any) => void ;
-  mmChange : (e: any) => void ;
-  selectedKeyOption : { label: String; value: String };
-  selectedMmOption : { label: String; value: String };
-  selectedDiatonicChord : {diatonicChord : DiatonicChord; chords : String[][]}
+  keyOptions : { label: string; value: string }[];
+  mmOptions : { label: string; value: string }[];
+  keyChange: (e: DropdownChangeEvent) => void; 
+  mmChange: (e: DropdownChangeEvent) => void; 
+  selectedKeyOption : { label: string; value: string };
+  selectedMmOption : { label: string; value: string };
+  selectedDiatonicChord : {diatonicChord : DiatonicChord; chords : string[][]}
   synth: Tone.PolySynth<Tone.Synth<Tone.SynthOptions>> | null;
 }
 

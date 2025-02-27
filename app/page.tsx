@@ -1,11 +1,6 @@
 "use client"
 
 import React, { useEffect, useState } from 'react';
-import { Button } from 'primereact/button';
-import { Card } from 'primereact/card';
-import { Panel } from 'primereact/panel';
-import { Sidebar } from 'primereact/sidebar';
-import { Toast } from 'primereact/toast';
 import { DiatonicChord } from './_interfaces/DiatonicChord';
 import { findAllDiactonicChords } from './api/DiatonicChords';
 import { DiatonicChordDisp } from './_components/DiatonicChord';
@@ -13,25 +8,26 @@ import { ProgressSpinner } from 'primereact/progressspinner';
 import * as Tone from 'tone';
 import Header from './_components/Header';
 import { ChordOptions } from './_components/ChordOptions';
+import { DropdownChangeEvent } from 'primereact/dropdown';
 
 const IndexPage = () => {
   const [diatonicChords, setDiatonicChords] = useState<DiatonicChord[]>([]);
   const [selectedDiatonicChord, setSelectedDiatonicChord] = useState<{
     diatonicChord: DiatonicChord;
-    chords: String[][];
+    chords: string[][];
   }>({
     diatonicChord: ChordOptions.initialDiatonicChord,
     chords: ChordOptions.initialChords
   });
 
-  const [keyOptions] = useState<{ label: String; value: String }[]>(ChordOptions.keys);
-  const [selectedKeyOption, setSelectedKeyOption] = useState<{ label: String; value: String }>({
+  const [keyOptions] = useState<{ label: string; value: string }[]>(ChordOptions.keys);
+  const [selectedKeyOption, setSelectedKeyOption] = useState<{ label: string; value: string }>({
     label: 'C',
     value: 'C'
   });
 
-  const [mmOptions] = useState<{ label: String; value: String }[]>(ChordOptions.modes);
-  const [selectedMmOption, setSelectedMmOption] = useState<{ label: String; value: String }>({
+  const [mmOptions] = useState<{ label: string; value: string }[]>(ChordOptions.modes);
+  const [selectedMmOption, setSelectedMmOption] = useState<{ label: string; value: string }>({
     label: 'M',
     value: 'M'
   });
@@ -39,18 +35,18 @@ const IndexPage = () => {
   const [loading, setLoading] = useState(true);
   const [synth, setSynth] = useState<Tone.PolySynth | null>(null);
 
-  const keyChange = (e: any) => {
-    setSelectedKeyOption({ label: e.value, value: e.value });
+  const keyChange = (e: DropdownChangeEvent) => {
+    setSelectedKeyOption({ label: e.target.value, value: e.target.value });
   };
-
-  const mmChange = (e: any) => {
-    setSelectedMmOption({ label: e.value, value: e.value });
+  
+  const mmChange = (e: DropdownChangeEvent) => {
+    setSelectedMmOption({ label: e.target.value, value: e.target.value });
   };
 
   const handleDiatonicChordUpdate = (diatonicChordresult: DiatonicChord) => {
     if (!diatonicChordresult) return;
 
-    const chordsResult: String[][] = [];
+    const chordsResult: string[][] = [];
     const degrees = [
       diatonicChordresult.one,
       diatonicChordresult.two,

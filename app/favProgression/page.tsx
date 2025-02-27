@@ -35,25 +35,25 @@ export default function ChordProgressionPage() {
     const [diatonicChords, setDiatonicChords] = useState<DiatonicChord[]>([]);
     const [selectedDiatonicChord, setSelectedDiatonicChord] = useState<{
         diatonicChord: DiatonicChord;
-        chords: String[][];
+        chords: string[][];
     }>({
         diatonicChord: ChordOptions.initialDiatonicChord,
         chords: ChordOptions.initialChords
     });
     
-    const [keyOptions] = useState<{ label: String; value: String }[]>(ChordOptions.keys);
-    const [selectedKeyOption, setSelectedKeyOption] = useState<{ label: String; value: String }>({
+    const [keyOptions] = useState<{ label: string; value: string }[]>(ChordOptions.keys);
+    const [selectedKeyOption, setSelectedKeyOption] = useState<{ label: string; value: string }>({
         label: 'C',
         value: 'C'
     });
     
-    const [mmOptions] = useState<{ label: String; value: String }[]>(ChordOptions.modes);
-    const [selectedMmOption, setSelectedMmOption] = useState<{ label: String; value: String }>({
+    const [mmOptions] = useState<{ label: string; value: string }[]>(ChordOptions.modes);
+    const [selectedMmOption, setSelectedMmOption] = useState<{ label: string; value: string }>({
         label: 'M',
         value: 'M'
     });
     
-    const [playPattern, setPlayPattern] = useState('normal');
+    const [playPattern, setPlayPattern] = useState<'normal' | 'rock' | 'ballad' | 'bossanova'>('normal');
 
     const rhythmPatternOptions = [
         { name: 'playPattern', value: 'normal', label: '通常再生' },
@@ -103,7 +103,7 @@ export default function ChordProgressionPage() {
     const handleDiatonicChordUpdate = (diatonicChordresult: DiatonicChord) => {
         if (!diatonicChordresult) return;
 
-        const chordsResult: String[][] = [];
+        const chordsResult: string[][] = [];
         const degrees = [
             diatonicChordresult.one,
             diatonicChordresult.two,
@@ -240,12 +240,13 @@ export default function ChordProgressionPage() {
 
         try {
             const activeChords = getActiveChords(progression);
-            const tempoMap = {
+            const tempoMap: Record<'normal' | 'rock' | 'ballad' | 'bossanova', number> = {
                 normal: 80,
                 rock: 100,
                 ballad: 65,
                 bossanova: 110
             };
+            
             
             const tempo = tempoMap[playPattern];
             const beatDuration = 60000 / tempo;

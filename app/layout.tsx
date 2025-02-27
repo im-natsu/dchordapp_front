@@ -1,6 +1,5 @@
 'use client';
 
-import type { Metadata } from "next";
 import "primereact/resources/themes/fluent-light/theme.css";
 import 'primeicons/primeicons.css';
 import 'primereact/resources/primereact.min.css';

@@ -1,19 +1,14 @@
 "use client"
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Button } from 'primereact/button';
-import { Card } from 'primereact/card';
-import { Panel } from 'primereact/panel';
-import { Sidebar } from 'primereact/sidebar';
-import { Toast } from 'primereact/toast';
-import * as Tone from 'tone'
 import Header from '../_components/Header';
-import { Dropdown } from 'primereact/dropdown';
+import { Dropdown, DropdownChangeEvent } from 'primereact/dropdown';
 import { ProgressSpinner } from 'primereact/progressspinner';
 import { useRouter } from 'next/navigation';
 import { RadioButton } from 'primereact/radiobutton';
 import { ChordOptions } from '../_components/ChordOptions';
 
-const trainingIndexPage = () => {
+const TrainingIndexPage = () => {
 
   const [keyOptions, setKeyOptions] = useState<{ label: string; value: string }[]>(ChordOptions.keys);   // ドロップダウンの選択肢
   const [selectedKeyOption, setSelectedKeyOption] = useState<{ label: string; value: string }>({ label : 'C' , value : 'C'});
@@ -26,11 +21,11 @@ const trainingIndexPage = () => {
   const [level, setLevel] = useState(1);
   const router = useRouter();
 
-  const keyChange = (e: any) => {
+  const keyChange = (e: DropdownChangeEvent) => {
     setSelectedKeyOption({ label: e.value, value: e.value }); // e.value を選択された値で更新
   };
   
-  const mmChange = (e: any) => {
+  const mmChange = (e: DropdownChangeEvent) => {
     setSelectedMmOption({ label: e.value, value: e.value }); // e.value を選択された値で更新
   };
 
@@ -160,4 +155,4 @@ const trainingIndexPage = () => {
   );
 };
 
-export default trainingIndexPage;
+export default TrainingIndexPage;

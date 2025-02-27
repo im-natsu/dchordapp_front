@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect} from 'react';
 import { Button } from 'primereact/button';
 import { ProgressSpinner } from 'primereact/progressspinner';
 import * as Tone from 'tone';
@@ -11,7 +11,7 @@ import { useSearchParams } from 'next/navigation';
 
 const TrainingPage = () => {
   const [diatonicChords, setDiatonicChords] = useState<DiatonicChord[]>([])
-    const [selectedDiatonicChord, setSelectedDiatonicChord] = useState<{diatonicChord : DiatonicChord; chords : String[][]}>({diatonicChord : {
+    const [selectedDiatonicChord, setSelectedDiatonicChord] = useState<{diatonicChord : DiatonicChord; chords : string[][]}>({diatonicChord : {
       key: "",
       mm: "",
       one: "",
@@ -24,7 +24,7 @@ const TrainingPage = () => {
       chords: [],
     }, chords : []});
   const [selectedChords, setSelectedChords] = useState<{
-      chords: String[],
+      chords: string[],
       degree: string
     }[]>([]);  
   const [currentSelection, setCurrentSelection] = useState<string[]>([]);
@@ -35,7 +35,6 @@ const TrainingPage = () => {
   const [count, setCount] = useState(1);
 
   const searchParams = useSearchParams();  // クエリパラメータを取得
-  const [isLoading, setIsLoading] = useState(true);
 
   // クエリパラメータを取得
   const level = searchParams.get('level');
@@ -86,7 +85,7 @@ const TrainingPage = () => {
         break;
     }
 
-  const chordsResult: String[][] = [];
+  const chordsResult: string[][] = [];
   for (let i = 1; i < 8; i++) {
     let foundChord;
     switch (i) {
@@ -212,31 +211,31 @@ const TrainingPage = () => {
       // degree によって chordArray を設定
       switch (degree) {
         case 'Ⅰ':
-          chordArray = selectedDiatonicChord.chords[0].map((note: String) => note.toString());
+          chordArray = selectedDiatonicChord.chords[0].map((note: string) => note.toString());
           playChord(chordArray);
           break;
         case 'Ⅱ':
-          chordArray = selectedDiatonicChord.chords[1].map((note: String) => note.toString());
+          chordArray = selectedDiatonicChord.chords[1].map((note: string) => note.toString());
           playChord(chordArray);
           break;
         case 'Ⅲ':
-          chordArray = selectedDiatonicChord.chords[2].map((note: String) => note.toString());
+          chordArray = selectedDiatonicChord.chords[2].map((note: string) => note.toString());
           playChord(chordArray);
           break;
         case 'Ⅳ':
-          chordArray = selectedDiatonicChord.chords[3].map((note: String) => note.toString());
+          chordArray = selectedDiatonicChord.chords[3].map((note: string) => note.toString());
           playChord(chordArray);
           break;
         case 'Ⅴ':
-          chordArray = selectedDiatonicChord.chords[4].map((note: String) => note.toString());
+          chordArray = selectedDiatonicChord.chords[4].map((note: string) => note.toString());
           playChord(chordArray);
           break;
         case 'Ⅵ':
-          chordArray = selectedDiatonicChord.chords[5].map((note: String) => note.toString());
+          chordArray = selectedDiatonicChord.chords[5].map((note: string) => note.toString());
           playChord(chordArray);
           break;
         case 'Ⅶ':
-          chordArray = selectedDiatonicChord.chords[6].map((note: String) => note.toString());
+          chordArray = selectedDiatonicChord.chords[6].map((note: string) => note.toString());
           playChord(chordArray);
           break;
         default:
@@ -298,7 +297,7 @@ const TrainingPage = () => {
     if (isAnswered) return;
 
     let correctCount = 0;
-    let answers: string[] = [];
+    const answers: string[] = [];
   
     currentSelection.forEach((selection, index) => {
       if (selection === selectedChords[index].degree) { // 音が一致するか確認
@@ -360,7 +359,7 @@ const TrainingPage = () => {
           label="主音"
           icon="pi pi-volume-up"
           className="custom-button"
-          onClick={() => playChord(selectedDiatonicChord.chords[0].map((note: String) => note.toString()))}
+          onClick={() => playChord(selectedDiatonicChord.chords[0].map((note: string) => note.toString()))}
           style={{
             position: 'absolute',
             top: '38%', // 再生ボタンより少し下に配置

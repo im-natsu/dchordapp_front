@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from 'react';
-import { TabMenu } from 'primereact/tabmenu';
+import { TabMenu, TabMenuTabChangeEvent } from 'primereact/tabmenu';
 import 'primereact/resources/themes/lara-light-indigo/theme.css';  // テーマ
 import 'primereact/resources/primereact.min.css';  // CSS
 import 'primeicons/primeicons.css';  // アイコン
@@ -32,7 +32,7 @@ const HeaderBar = () => {
     { label: 'みんなのコード進行', icon: 'pi pi-users', url: '/favProgression' }
   ];
 
-  const handleTabChange = (e: any) => {
+  const handleTabChange = (e: TabMenuTabChangeEvent) => {
     setActiveIndex(e.index);
     router.push(items[e.index].url);  // URLに遷移
   };
