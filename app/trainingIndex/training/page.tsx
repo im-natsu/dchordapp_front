@@ -171,6 +171,8 @@ const TrainingPage = () => {
   };
 
   useEffect(() => {
+    if (typeof window === "undefined") return; // サーバーサイドでは実行しない
+  
     const getDiatonicChords = async () => {
       setLoading(true);
       try {
@@ -181,9 +183,10 @@ const TrainingPage = () => {
       }
       setLoading(false);
     };
-
+  
     getDiatonicChords();
   }, []); // 最初にデータを取得
+  
 
   useEffect(() => {
     setLoading(true);
