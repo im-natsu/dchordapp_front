@@ -45,33 +45,34 @@ const TrainingPage = () => {
 
   // 音を再生する関数
   const playChord = (chord: string[]) => {
-        const limiter = new Tone.Limiter(-6).toDestination();
-        const compressor = new Tone.Compressor({
-            threshold: -24,
-            ratio: 4,
-            attack: 0.005,
-            release: 0.1
-        }).connect(limiter);
-  
-        const polySynth = new Tone.PolySynth(Tone.Synth, {
-          volume: -12,
-          // Tone.Synth のオプションを直接渡す
-          envelope: {
-            attack: 0.02,
-            decay: 0.1,
-            sustain: 0.3,
-            release: 1
-          }
-        }).connect(compressor);
-        polySynth.triggerAttackRelease(chord, '8n');
+      // クライアントサイドでのみ実行
+      if (typeof window === "undefined") return;
+
+      const limiter = new Tone.Limiter(-6).toDestination();
+      const compressor = new Tone.Compressor({
+          threshold: -24,
+          ratio: 4,
+          attack: 0.005,
+          release: 0.1
+      }).connect(limiter);
+
+      const polySynth = new Tone.PolySynth(Tone.Synth, {
+        volume: -12,
+        // Tone.Synth のオプションを直接渡す
+        envelope: {
+          attack: 0.02,
+          decay: 0.1,
+          sustain: 0.3,
+          release: 1
+        }
+      }).connect(compressor);
+      polySynth.triggerAttackRelease(chord, '8n');
   };
 
   // そのレベルで使用するダイアトニックコードを取り出す。
   const getUseChords = () => {
     let diatonicChordresult;
     setLoading(true);
-    if (!diatonicChords || diatonicChords.length === 0) return; // データが取得できていない場合は処理を中断
-  
     switch (level) {
       case '1':
         diatonicChordresult = diatonicChords.find(diatonicChord => diatonicChord.key === 'C' && diatonicChord.mm === 'M');
@@ -87,13 +88,7 @@ const TrainingPage = () => {
         diatonicChordresult = undefined;
         break;
     }
-  
-    if (!diatonicChordresult) {
-      console.log("ダイアトニックコードが見つかりませんでした");
-      setLoading(false);
-      return;
-    }
-  
+
   const chordsResult: string[][] = [];
   for (let i = 1; i < 8; i++) {
     let foundChord;
@@ -179,23 +174,23 @@ const TrainingPage = () => {
     return shuffled.slice(0, 4);
   };
 
-  useEffect(() => {
-    if (typeof window === "undefined") return; // クライアントサイドでのみ実行
-  
-    const getDiatonicChords = async () => {
-      setLoading(true);
-      try {
-        const response = await findAllDiactonicChords();
-        setDiatonicChords(response); // データをセット
-      } catch (error) {
-        console.error('コードの取得に失敗しました:', error);
-      }
-      setLoading(false);
-    };
-  
-    getDiatonicChords();
-  }, []); // 最初にデータを取得
-  
+    useEffect(() => {
+      // クライアントサイドでのみ実行
+      if (typeof window === "undefined") return;
+      
+      const getDiatonicChords = async () => {
+        setLoading(true);
+        try {
+          const response = await findAllDiactonicChords();
+          setDiatonicChords(response);
+        } catch (error) {
+          console.error('コードの取得に失敗しました:', error);
+        }
+        setLoading(false);
+      };
+        
+      getDiatonicChords();
+    }, []);
   
 
   useEffect(() => {
@@ -265,6 +260,8 @@ const TrainingPage = () => {
   };
 
   const handleReplay = () => {
+    if (typeof window === "undefined") return;
+
     Tone.Transport.stop();
     Tone.Transport.cancel();
     
