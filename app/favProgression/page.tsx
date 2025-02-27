@@ -171,16 +171,15 @@ export default function ChordProgressionPage() {
         if (diatonicChords.length > 0) {
             const diatonicChordresult = diatonicChords.find(
                 diatonicChord => 
-                    diatonicChord.key === selectedKeyOption.value && 
+                    diatonicChord.key === selectedKeyOption.value &&
                     diatonicChord.mm === selectedMmOption.value
             );
-            
+                    
             if (diatonicChordresult) {
                 handleDiatonicChordUpdate(diatonicChordresult);
             }
         }
-    }, [selectedKeyOption, selectedMmOption, diatonicChords]);
-    
+    }, [diatonicChords, selectedKeyOption.value, selectedMmOption.value]);    
 
     const degrees = ['Ⅰ', 'Ⅱ', 'Ⅲ', 'Ⅳ', 'Ⅴ', 'Ⅵ', 'Ⅶ'];
 
