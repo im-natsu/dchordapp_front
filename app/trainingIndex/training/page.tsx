@@ -9,6 +9,7 @@ import { DiatonicChord } from '@/app/_interfaces/DiatonicChord';
 import { findAllDiactonicChords } from '@/app/api/DiatonicChords';
 import { useSearchParams } from 'next/navigation';
 
+
 const TrainingPage = () => {
   const [diatonicChords, setDiatonicChords] = useState<DiatonicChord[]>([])
     const [selectedDiatonicChord, setSelectedDiatonicChord] = useState<{diatonicChord : DiatonicChord; chords : string[][]}>({diatonicChord : {
@@ -189,6 +190,7 @@ const TrainingPage = () => {
   
 
   useEffect(() => {
+    if (typeof window === "undefined") return;
     setLoading(true);
     if (diatonicChords.length > 0) {
       getUseChords()
@@ -200,6 +202,7 @@ const TrainingPage = () => {
   }, [diatonicChords]); // diatonicChords が更新されるたびに実行
 
   useEffect(() => {
+    if (typeof window === "undefined") return;
     setSelectedChords(getRandomChords());
   }, [selectedDiatonicChord]); 
 
